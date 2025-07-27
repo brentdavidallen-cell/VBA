@@ -1,0 +1,152 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<HTML>
+<HEAD>
+<meta name="GENERATOR" content="Microsoft&reg; HTML Help Workshop 4.1">
+<!-- Sitemap 1.0 -->
+</HEAD><BODY>
+<OBJECT type="text/site properties">
+        <param name="ImageType" value="Folder">
+</OBJECT>
+<UL>
+        <LI> <OBJECT type="text/sitemap">
+                <param name="Name" value="Getting Started with Visual Basic">
+                </OBJECT>
+        <UL>
+                <LI> <OBJECT type="text/sitemap">
+                        <param name="Name" value="Loading and running a VBA macro">
+                        <param name="Local" value="html/usvba_loadmacros.htm">
+                        </OBJECT>
+                <LI> <OBJECT type="text/sitemap">
+                        <param name="Name" value="MicroStation Connect Objects">
+                        </OBJECT>
+                <UL>
+                        <LI> <OBJECT type="text/sitemap">
+                                <param name="Name" value="Automation Object Model">
+                                <param name="Local" value="html/usvba_AutomationHierarchy.htm">
+                                </OBJECT>
+                        <LI> <OBJECT type="text/sitemap">
+                                <param name="Name" value="Application object structure">
+                                <param name="Local" value="html/usobjApplicationStructure.htm">
+                                </OBJECT>
+                        <LI> <OBJECT type="text/sitemap">
+                                <param name="Name" value="ModelReference object structure">
+                                <param name="Local" value="html/usobjModelReferenceStructure.htm">
+                                </OBJECT>
+                        <LI> <OBJECT type="text/sitemap">
+                                <param name="Name" value="Attachment object structure">
+                                <param name="Local" value="html/usobjAttachmentStructure.htm">
+                                </OBJECT>
+                        <LI> <OBJECT type="text/sitemap">
+                                <param name="Name" value="ActiveSettings object structure">
+                                <param name="Local" value="html/usobjActiveSettingsStructure.htm">
+                                </OBJECT>
+                        <LI> <OBJECT type="text/sitemap">
+                                <param name="Name" value="What is not in the Automation Object Model?">
+                                <param name="Local" value="html/usvba_automation_missing.htm">
+                                </OBJECT>
+                        <LI> <OBJECT type="text/sitemap">
+                                <param name="Name" value="Understanding objects, properties and methods">
+                                <param name="Local" value="html/usvba_objects.htm">
+                                </OBJECT>
+                </UL>
+                <LI> <OBJECT type="text/sitemap">
+                        <param name="Name" value="Frequently asked MicroStation VBA Questions">
+                        <param name="Local" value="html/usvba_faq.htm">
+                        </OBJECT>
+                <LI> <OBJECT type="text/sitemap">
+                        <param name="Name" value="Using the MicroStation VBA Interface">
+                        </OBJECT>
+                <UL>
+                        <LI> <OBJECT type="text/sitemap">
+                                <param name="Name" value="Project Manager">
+                                <param name="Local" value="html/usvba_projectMngr.htm">
+                                </OBJECT>
+                        <LI> <OBJECT type="text/sitemap">
+                                <param name="Name" value="The Macros dialog box">
+                                <param name="Local" value="html/usvba_macrosdb.htm">
+                                </OBJECT>
+                        <LI> <OBJECT type="text/sitemap">
+                                <param name="Name" value="MicroStation VBA Environment Variables">
+                                <param name="Local" value="html/usvba_configvars.htm">
+                                </OBJECT>
+                        <LI> <OBJECT type="text/sitemap">
+                                <param name="Name" value="MicroStation VBA Keyins">
+                                <param name="Local" value="html/usvba_keyins.htm">
+                                </OBJECT>
+                        <LI> <OBJECT type="text/sitemap">
+                                <param name="Name" value="Using the Visual Basic Editor">
+                                <param name="Local" value="html/usvba_editor.htm">
+                                </OBJECT>
+                </UL>
+                <LI> <OBJECT type="text/sitemap">
+                        <param name="Name" value="Recording and Revising Macros">
+                        <param name="Local" value="html/usvba_recording.htm">
+                        </OBJECT>
+                <LI> <OBJECT type="text/sitemap">
+                        <param name="Name" value="Automating common MicroStation tasks">
+                        <param name="Local" value="html/usvba_automating_tasks.htm">
+                        </OBJECT>
+                <LI> <OBJECT type="text/sitemap">
+                        <param name="Name" value="Working with MicroStation Objects">
+                        <param name="Local" value="html/usvba_working_with_objects.htm">
+                        </OBJECT>
+                <LI> <OBJECT type="text/sitemap">
+                        <param name="Name" value="Working with MicroStation Events">
+                        <param name="Local" value="html/usvba_working_with_events.htm">
+                        </OBJECT>
+                <LI> <OBJECT type="text/sitemap">
+                        <param name="Name" value="Customizing MicroStation with Visual Basic">
+                        <param name="Local" value="html/usvba_customizing.htm">
+                        </OBJECT>
+        </UL>
+        <LI> <OBJECT type="text/sitemap">
+                <param name="Name" value="Developing Code in VBA">
+                </OBJECT>
+        <UL>
+                <LI> <OBJECT type="text/sitemap">
+                        <param name="Name" value="Interface oriented programming">
+                        <param name="Local" value="html/usvba_interface_programming.htm">
+                        </OBJECT>
+                <LI> <OBJECT type="text/sitemap">
+                        <param name="Name" value="Interacting with MDL">
+                        <param name="Local" value="html/usvba_interacting_with_MDL.htm">
+                        </OBJECT>
+                <LI> <OBJECT type="text/sitemap">
+                        <param name="Name" value="Changes for 64-bit Processes">
+                        <param name="Local" value="html/usvba_64bit_processes.htm">
+                        </OBJECT>
+                <LI> <OBJECT type="text/sitemap">
+                        <param name="Name" value="Calling DLL functions from VBA">
+                        <param name="Local" value="html/usvba_calling_dll_functions.htm">
+                        </OBJECT>
+                <LI> <OBJECT type="text/sitemap">
+                        <param name="Name" value="Units and coordinate systems in VBA">
+                        <param name="Local" value="html/usvba_units.htm">
+                        </OBJECT>
+                <LI> <OBJECT type="text/sitemap">
+                        <param name="Name" value="Events">
+                        <param name="Local" value="html/usvba_programming_events.htm">
+                        </OBJECT>
+                <LI> <OBJECT type="text/sitemap">
+                        <param name="Name" value="Handling design elements">
+                        <param name="Local" value="html/usvba_handling_elements.htm">
+                        </OBJECT>
+                <LI> <OBJECT type="text/sitemap">
+                        <param name="Name" value="Organization of a MicroStation command">
+                        <param name="Local" value="html/usvba_org_of_commands.htm">
+                        </OBJECT>
+                <LI> <OBJECT type="text/sitemap">
+                        <param name="Name" value="Accessing data and other applications">
+                        <param name="Local" value="html/usvba_other_apps.htm">
+                        </OBJECT>
+                <LI> <OBJECT type="text/sitemap">
+                        <param name="Name" value="Common Mistakes">
+                        <param name="Local" value="html/usvba_common_mistakes.htm">
+                        </OBJECT>
+                <LI> <OBJECT type="text/sitemap">
+                        <param name="Name" value="Object Model Change History">
+                        <param name="Local" value="html/usvba_2004InterfaceChanges.htm">
+                        </OBJECT>
+        </UL>
+</UL>
+</BODY></HTML>

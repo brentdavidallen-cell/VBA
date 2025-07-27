@@ -1,0 +1,59 @@
+<!--ArborText, Inc., 1988-2002, v.4002-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>MicroStation VBA Keyins</title>
+<link href="/Office.css" type="text/css" rel="StyleSheet" media="screen"></head>
+<body><div><h1>MicroStation VBA Key-ins</h1><p>Key-ins can also be used to
+activate and control Visual Basic projects and macros within MicroStation.
+</p><div><h2>Controlling VBA projects with keyins</h2><p>Most functions relating
+to projects that can be accomplished in the Project Manager can also be controlled
+using key-in commands. The most common keyins related to projects are described
+below.</p><div><h4>To create a Visual Basic project:</h4><p>Use the following
+key-in:</p><p><code>MACRO VBA CREATE &lt;projectname></code></p><p>This key-in creates
+a new VBA project and loads it into the project list in the Project Manager.
+If a file path is not specified, the project is created in the \Bentley\Program\MicroStation\
+directory, unless the MS_VBANEWPROJECTDIRECTORY configuration variable has
+been set. If the path has been set, the location specified by this variable
+is the location for the new project. See <a href="usvba_configvars.htm#usvbaConfigvarNewProject">
+Location of new VBA projects</a>.</p></div><div><h4>To load an existing Visual
+Basic project:</h4><p>Use the following key-in:</p><p><code>MACRO VBA LOAD &lt;projectname>
+</code></p><p>If the file path to the .mvba file is not specified, then MicroStation
+searches in the directories specified by MS_VBASEARCHDIRECTORIES. If a .mvba
+file is found with a root name that matches the specified project name, it
+is loaded. See <a href="usvba_configvars.htm#usvbaConfigvarProjectSearchPath">
+Search path for VBA projects</a>.</p></div><div><h4>To open the Visual Basic
+editor:</h4><p>Use the following key-in:</p><p><code>MACRO VBA EDIT &lt;projectname>
+</code></p><p>The Microsoft Visual Basic window opens showing the specified
+project. If the named project is not currently loaded but can be found in
+the path(s) set by MS_VBASEARCHDIRECTORIES, it will be loaded automatically.
+The Visual Basic editor window can also be invoked with the following key-in:
+</p><p><code>MACRO VBA SHOW EDITOR</code></p></div><div><a name="keyin_vba_run"></a><h4>
+To run a VBA macro from a currently loaded project:</h4><p>Use the following
+key-in:</p><p><code>MACRO VBA RUN &lt;macroname></code></p><p>The macro begins running
+immediately.</p></div><div><h4>To load a project and run a macro with one
+key-in:</h4><p>Use the following key-in:</p><p><code>MACRO VBA RUN [projectname]&lt;macroname>
+</code></p><p>Be sure to include the square brackets around the project name,
+so that MicroStation knows which .mvba file to search for.</p><p><b>Note:
+</b> The square brackets are also needed if two loaded projects have macros
+with the same name.</p></div><div><a name="keyin_vba_execute"></a><h4>To execute
+a VBA statement with a key-in:</h4><p>Use the following key-in:</p><p><code>
+MACRO VBA EXECUTE [projectname] &lt;statement></code></p><p>The statement is executed
+in the context of the named project. If no project name is specified, MicroStation
+chooses a project to use as the context. There is no need to specify a context
+if the statement uses only the MicroStationDGN object model.</p><p>The VBA
+statement is not case-sensitive. For example, the key-in:</p><p><code>MACRO VBA
+EXECUTE if ActiveModelReference.Is3D then MsgBox "Three D"</code></p><p>is
+the equivalent of:</p><p><code>MACRO VBA EXECUTE if activemodelreference.is3d then
+msgbox "Three D"</code></p></div><div><h4>To save all currently loaded projects:
+</h4><p>Use the following key-in:</p><p><code>MACRO VBA SAVEALL</code></p><p>Any
+project that is currently loaded and has been modified is saved to its .mvba
+disk file.</p></div><div><h4>To unload a currently loaded project:</h4><p>
+Use the following key-in:</p><p><code>MACRO VBA UNLOAD &lt;projectname></code></p><p>
+The specified project is immediately unloaded.</p></div><div><h4>To hide the
+Visual Basic editor:</h4><p>Use the following key-in:</p><p><code>MACRO VBA HIDE
+</code></p><p>The Visual Basic editor window is closed, even if it is in the
+background (not visible) when the key-in is entered. This key-in does not
+disable any VBA functionality, it merely hides the development environment.
+</p></div></body>
+</html>

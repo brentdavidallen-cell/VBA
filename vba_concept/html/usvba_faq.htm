@@ -1,0 +1,122 @@
+<!--ArborText, Inc., 1988-2002, v.4002-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>MicroStation VBA FAQ</title>
+<link href="/Office.css" type="text/css" rel="StyleSheet" media="screen"></head>
+<body><div><h1>Frequently asked questions</h1><p>Below are several lists of
+questions with links to answers listed further down in the document. The lists
+are divided into the following categories:</p><ul>
+<li><a href="#overviewFAQ">MicroStation VBA Overview</a></li>
+<li><a href="#programmingFAQ">MicroStation VBA Programming</a></li>
+</ul><div><h2><a name="overviewFAQ"></a>MicroStation VBA Overview FAQ</h2><ol>
+<li>What is MicroStation VBA? <a href="#overview_what_is_vba_answer">Answer
+</a><p></p></li>
+<li>What can I do with MicroStation VBA? <a href="#overview_what_can_I_do_with_vba_answer">
+Answer</a><p></p></li>
+<li>What Bentley products support MicroStation VBA? <a href="#overview_what_supports_vba_answer">
+Answer</a><p></p></li>
+<li>Do I have to use the MicroStation VBA editor for my VBA applications to
+run in MicroStation CONNECT Edition? <a href="#overview_must_I_use_vba_editor_answer">
+Answer</a><p></p></li>
+<li>Are there any configuration variables in MicroStation CONNECT Edition that must be
+set before I can use MicroStation VBA? <a href="#overview_are_there_vba_config_vars_answer">
+Answer</a><p></p></li>
+<li>What key-ins are used with MicroStation VBA and what do they do? <a href="#overview_what_key-ins_exist_for_vba_answer">
+Answer</a><p></p></li>
+</ol><div><h2>Answers to MicroStation VBA Overview Questions</h2><ol>
+<li><a name="overview_what_is_vba_answer"></a>(What is MicroStation VBA?)<br>MicroStation
+ CONNECT Edition includes and supports Visual Basic for Applications. MicroStation VBA is a complete Application Programming
+Interface that allows you to write custom applications that interface with
+MicroStation CONNECT Edition.<p></p></li>
+<li><a name="overview_what_can_I_do_with_vba_answer"></a>(What can I do with
+MicroStation VBA?)<br>The goal of MicroStation VBA is to allow you to develop
+your own custom applications to automate many activities in MicroStation.
+Using VBA, you can develop standard desktop applications that can interact
+with MicroStation, increasing user productivity. VBA includes a wide array
+of tools that provide users with more and easier customization that ever before.<p></p></li>
+<li><a name="overview_what_supports_vba_answer"></a>(What Bentley products
+support MicroStation VBA?)<br>Currently, Bentley MicroStation, Bentley PowerDraft,
+and Bentley Redline support creating, recording and running MicroStation VBA
+macros. Support for MicroStation VBA is constrained in Bentley Redline to
+the abilities of that product. Other Bentley software products provide APIs
+that are accessible from VBA. More information is available on the <a href="http://www.bentley.com">
+Bentley web site</a>.<p></p></li>
+<li><a name="overview_must_I_use_vba_editor_answer"></a>(Do I have to use
+the MicroStation VBA editor for my VBA applications to run in MicroStation
+CONNECT Edition?)<br>No, you can write VBA code in whatever text editor you choose; however,
+to compile the code to work in MicroStation CONNECT Edition you must paste it into a code
+window in the VBA editor in MicroStation CONNECT Edition.<p></p></li>
+<li><a name="overview_are_there_vba_config_vars_answer"></a>(Are there any
+configuration variables in MicroStation CONNECT Edition that must be set before I can use
+MicroStation VBA?)<br>No. There are configuration variables that modify the
+behavior of MicroStation VBA, but they do not have to be adjusted before using
+VBA in MicroStation. See <a href="ms-its:vba_concept.chm::/html/usvba_configvars.htm">
+MicroStation VBA Environment Variables</a>.<p></p></li>
+<li><a name="overview_what_key-ins_exist_for_vba_answer"></a>(What key-ins
+are used with MicroStation VBA and what do they do?)<br>A list of the key-in
+commands that can be used with various parts of MicroStation VBA can be found
+in this help file. See <a href="ms-its:vba_concept.chm::/html/usvba_keyins.htm">
+MicroStation VBA Key-ins</a>.<p></p></li>
+</ol></div><div><h2><a name="programmingFAQ"></a>MicroStation VBA Programming
+FAQ</h2><ol>
+<li>Typically, what skills are needed to start programming with VBA in MicroStation
+CONNECT Edition? <a href="#programming_skills_answer">Answer</a><p></p></li>
+<li>Can I add non-modal dialog boxes to my MicroStation VBA macro? <a href="#programming_modal_forms_answer">
+Answer</a><p></p></li>
+<li>How do I compile a MicroStation VBA macro? <a href="#programming_how_to_compile_answer">
+Answer</a><p></p></li>
+<li>Can I protect my MicroStation VBA project so that others cannot see the
+source code in it, but can still run it? <a href="#programming_protection_answer">
+Answer</a><p></p></li>
+<li>How can I get the contents of the current selection set in MicroStation
+VBA? <a href="#programming_selection_set_answer">Answer</a><p></p></li>
+<li>How can I pass arguments to a VBA macro that is activated with a key-in
+command? <a href="#programming_command_line_arguments_answer">Answer</a><p></p></li>
+</ol><h2>Answers to MicroStation VBA Programming Questions</h2><ol>
+<li><a name="programming_skills_answer"></a>(Typically, what skills are needed
+to start programming with VBA in MicroStation CONNECT Edition?)<br>The MicroStation VBA
+language is most consistent with the Visual Basic for Applications programming
+language standards and styles. Programming skills acquired in learning the
+Visual Basic for Applications language with the Microsoft Office suite of
+applications will provide a good background for programming with VBA in MicroStation
+CONNECT Edition.<p></p></li>
+<li><a name="programming_modal_forms_answer"></a>(Can I add non-modal dialog
+boxes to my MicroStation VBA macro?)<br>Yes. To make a user form non-modal,
+set the ShowModal property of the form to False. This can be done in the Properties
+window for the user form. Additionally, a dialog can be displayed in a non-modal
+form using the optional boolean parameter to the Show method that sets the
+ShowModal property. To display a form named UserForm1 as non-modal, the Show
+method would be written:<p><code>UserForm1.Show vbModeless</code></p></li>
+<li><a name="programming_how_to_compile_answer"></a>(How do I compile a MicroStation
+VBA macro?)<br>In the VBA editor window, select the Run menu, then choose
+Run Sub/User Form. The macro is compiled immediately before it is executed.
+A shortcut to this menu item is to press the &lt;F5> function key, which has
+the same effect.<p></p></li>
+<li><a name="programming_protection_answer"></a>(Can I protect my MicroStation
+VBA project so that others cannot see the source code in it, but can still
+run it?)<br>Yes. In the Visual Basic editor window select the Tools menu,
+then select the menu item that shows [project name] Properties, where [project
+name] is the name of the current project. In this dialog, select the Protection
+tab. Here, a password can be added so that editing or viewing the source code
+in the project requires the user to enter the password.<p></p></li>
+<li><a name="programming_selection_set_answer"></a>(How can I get the contents
+of the current selection set in MicroStation VBA?)<br>First dimension a variable
+of type ElementEnumerator, then set this variable to the return value of GetSelectedElements
+from the ActiveModelReference, like this:<p><code>Dim oEnumerator as ElementEnumerator<br>Set
+oEnumerator = ActiveModelReference.GetSelectedElements</code></p><p>See the <a
+href="ms-its:MicroStationVBA.chm::/html/ussmpselectset.htm">Selection Set
+</a> example.</p></li>
+<li> <a name="programming_command_line_arguments_answer">(How can I pass arguments
+to a VBA macro that is activated with a key-in command?)</a><br>Microsoft's
+VBA implementation does not support passing command line arguments to a basic
+macro. However, Bentley has added a means to accomplish this through the use
+of a global variable named <a href="ms-its:MicroStationVBA.chm::/html/usprokeyinarguments.htm">
+KeyinArguments</a>. This string variable will contain any additional arguments
+that were provided to the <code>MACRO vba run &lt;macro></code> keyin. For example,
+this sub-procedure:<p><code>Public Sub getArgs()<br>&nbsp;&nbsp;&nbsp;MsgBox
+KeyinArguments<br>End Sub</code></p><p>called with this key-in string:</p><p><code>
+MACRO VBA RUN getArgs VBA is fun!</code></p><p>will display a dialog box with the
+string &ldquo;VBA is fun!&rdquo;.</p></li>
+</ol></div></div></div></body>
+</html>

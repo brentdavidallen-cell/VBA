@@ -1,0 +1,96 @@
+<!--ArborText, Inc., 1988-2002, v.4002-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>VBA Project Manager</title>
+<link href="/Office.css" type="text/css" rel="StyleSheet" media="screen"></head>
+<body> <div><h1>Using the Project
+Manager</h1><p>The Project Manager dialog box provides easy access to all
+functions related to loading, running, and managing Visual Basic macros in
+MicroStation.</p><h4>To open the Project Manager dialog box:</h4><ol>
+<li>Select Drawing > Utilities > Macros > VBA Manager.<br>The Project
+Manager dialog box opens.</li>
+</ol><div><h2>The Project Manager Tool bar</h2><p>The Project Manager dialog
+box does not have pull-down menus like most other dialog boxes in MicroStation
+that manage files or settings. Instead, it has a tool bar at the top of the
+dialog that gives access to most of the commands necessary to manage Visual
+Basic projects and macros. Each of the tools that appears in the Project Manager
+tool bar is described below.</p><div><h3>New Project</h3><p>The New Project
+icon is used to create a new VBA project. When you click the New Project icon,
+the Create VBA Project dialog appears, allowing you to enter the name and
+location of the file that will be created to contain the new project. Initially,
+the root file name is also used to name the project module in the Project
+Manager dialog. It is not necessary for the project module to remain the same
+as the file that contains it.</p></div><div><h3>Load Project</h3><p>The Load
+Project icon is used to load an existing VBA project into the Project Manager.
+When you click the Load Project icon, the Load Project dialog appears, allowing
+you to select the .mvba file to load. After choosing a file, clicking the
+OK button loads the contents of the chosen file into Project Manager. </p><p>
+Like many other dialogs that load various files in MicroStation, a configuration
+variable can be selected to set the path to choose a project file, or the
+Current Working directory can also be selected from the Directory menu in
+this dialog box.</p></div><div><h3>Unload Project</h3><p>The Unload Project
+icon is used to unload a Visual Basic project that is currently loaded in
+memory. The Unload Project icon is dimmed and unselectable until a project
+is selected in the Project Manager window. Clicking the Unload Project icon
+immediately unloads the selected project. If a macro in the selected project
+is currently running when the Unload Project icon is selected, it is halted
+before the project unloads.</p></div><div><h3>Save As</h3><p>The Save As icon
+is used to duplicate the selected project to another project file, but it
+does not rename the project module itself. For example, if a project module
+named &ldquo;macros2&rdquo; is currently loaded in Project Manager and is
+selected, and the Save As icon is chosen, another file can be created which
+will then also contain a project named &ldquo;macros2&rdquo; even though the
+file name will be different from the file that contained the original project.
+</p></div><div><h3>Visual Basic Editor</h3><p>The Visual Basic Editor icon
+is used to display the editor window and its contents. All currently loaded
+projects are accessible from the editor window, so it is not necessary to
+select a project from the Project Manager before clicking the Visual Basic
+Editor window. Since it is not possible to create a Visual Basic project in
+the editor window, any necessary project should be created or loaded before
+opening the editor.</p></div><div><h3>Macros</h3><p>The Macros icon is used
+to display the Macros dialog box, showing a list of all available macros in
+all loaded projects. See the <a href="usvba_macrosdb.htm#macros_db">Macros
+dialog box</a> for more information.</p></div><div><h3>Start Record</h3><p>
+The Start Record icon is used to begin the process of recording actions in
+MicroStation to a Visual Basic macro. The Start Record icon is dimmed and
+not selectable unless a project is currently highlighted in the Project Manager
+list of projects.</p></div><div><h3>Stop Record</h3><p>The Stop Record icon
+is used to stop the process of recording actions in MicroStation to a Visual
+Basic macro. The Stop Record icon is dimmed and not selectable until the recording
+process has been initiated. Once the Stop Record icon is clicked, the macro
+can only be changed or appended by using the Visual Basic editor.</p></div><div><h3>
+Pause Record</h3><p>The Pause Record icon is used to temporarily stop the
+macro recording process so that some action or command that should not be
+recorded can take place. The Pause Record icon is dimmed and not selectable
+until the recording process is initiated. Once the recording process has been
+paused, any actions in MicroStation are not recorded to the macro. To resume
+recording, click the Pause Record icon a second time.</p></div></div></div><div><h2>
+Other functions of the Project Manager</h2><p>The Project Manager dialog box
+also provides features for renaming projects, for adding and editing macro
+descriptions, and for setting a project to autoload. These functions are described
+below.</p><p>In addition, the Project Manager has a pop-up menu that appears
+when a right-click takes place in the project list area of the dialog. The
+items in this menu parallel the functions of the tool bar icons, or the functions
+described below.</p><div><h3>Renaming a project</h3><p>The Name field in the
+VBA Project Manager dialog is an editable field. This means the name of the
+currently highlighted project can be edited by clicking directly on the name,
+or by right-clicking, and selecting Rename from the pop-up menu. </p></div><div><h3>
+Adding or editing a project description</h3><p>The Description field in the
+VBA Project Manager dialog box is also an editable field. This means the description
+of the currently highlighted project can be edited by clicking directly on
+the description. While there is no practical limit to the length of a project
+description, it is only displayed in the Project Manager dialog, which has
+limited room for description display, and in a flyover tag that appears when
+the pointer is moved over the description field.</p></div><div><h3><a name="autoloadingVBA"></a>Autoloading
+a project</h3><p>A project can be selected to &ldquo;autoload&rdquo; when
+MicroStation is opened. This makes the macros within that project available
+immediately upon startup. To set a project to autoload, load the project into
+Project Manager, then click the Autoload field for that project in the Project
+Manager dialog box. A check mark in this field indicates the project will
+&ldquo;autoload&rdquo; the next time MicroStation is started.</p><p><b>Note:
+</b> A project is not automatically loaded at startup unless the file that
+contains it is in a directory that is specified in the MicroStation configuration
+variable MS_VBASEARCHDIRECTORIES. See <a href="usvba_configvars.htm">VBA Configuration
+Variables</a> for more information.</p></div></div></body>
+</html>

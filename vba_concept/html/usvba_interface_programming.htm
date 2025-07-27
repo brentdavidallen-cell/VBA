@@ -1,0 +1,89 @@
+<!--ArborText, Inc., 1988-2002, v.4002-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Interface Oriented Programming</title>
+<link href="/Office.css" type="text/css" rel="StyleSheet" media="screen"></head>
+<body><div><h1>Interface Oriented Programming</h1><p>An interface is a group
+of properties, events and methods that belong to a class. Every class has
+at least one interface, which includes all of the methods and properties declared
+in that class. The default interface is usually referred to by the name of
+the class, though its formal name is the class name preceded by an underscore
+character.</p><div><h2>Using interfaces in MicroStation VBA</h2><p>The MicroStationDGN
+object model includes several different interfaces that are designed to make
+certain programming tasks easier to implement. In order to understand why,
+a brief discussion of how to use an interface in VBA is necessary.</p><div><h3>
+Implements Statement</h3><p>Since an interface is really a collection of prototypes
+for the methods and properties of a class, it is necessary for a class that
+&ldquo;implements&rdquo; the interface to duplicate all of the Public methods
+declared as part of the interface. A missing member of an interface will cause
+an error in compilation. The Implements statement, used to declare that a
+class is making use of an interface, is really a contract that states the
+class is going to provide code for each of the methods of the interface.</p><p>
+The Implements statement to inform MicroStation that a class is going to provide
+code for the IPrimitiveCommandEvents interface looks like this:<br><code><br>Implements
+IPrimitiveCommandEvents<br></code><br>The class then must provide code for
+each of the six methods in the PrimitiveCommand interface. These are:</p><p><code>
+IPrimitiveCommandEvents_DataPoint<br>IPrimitiveCommandEvents_Dynamics<br>IPrimitiveCommandEvents_Keyin<br>IPrimitiveCommandEvents_Reset<br>IPrimitiveCommandEvents_Start<br>IPrimitiveCommandEvents_Cleanup
+</code></p><p>These methods allow your VBA program to respond to each of the
+events necessary to create and place a design element in the active model.
+MicroStation calls each of these methods by name when the actions of the user
+dictate. For an example of implementing this interface, see the <a href="ms-its:MicroStationVBA.chm::/html/ussmpprimitive.htm">
+Element Creation Command </a>example.</p><p>To conclude, the use of an interface
+tells MicroStation that the class has methods to call in certain circumstances,
+and that the class behaves in a particular way. The IPrimitiveCommandEvents
+interface says the class behaves like a MicroStation tool such as Place Arc
+or Place Circle (both &ldquo;primitive&rdquo; command tools because they place
+primitive elements). When the class implementing this interface is activated,
+the IPrimitiveCommandEvents_Start method is called first, which usually places
+a prompt message in the status bar area. Other methods are called at similar
+times. See the <a href="ms-its:MicroStationVBA.chm::/html/usobjIPrimitiveCommandEvents.htm">
+IPrimitiveCommandEvents</a> description for more details.</p></div></div><div><h2>
+Utilizing interfaces</h2><p>There are a several interfaces that you can utilize
+in your VBA programs to receive notification when certain things happen in
+MicroStation. For example, using the <code>IAttachmentEvents</code> interface,
+your program can receive notification immediately before and after a reference
+is attached to the active DGN file.</p><p>Listed below are some of the interfaces
+that your program can use to receive notification of such events in MicroStation,
+and a general description of the kinds of events your program can receive
+with each.</p><ul>
+<li><code>IAttachmentEvents</code> &mdash; Receives notification before and
+after a reference is attached to the active DGN file, when a reference attachment
+is modified, and before and after a reference is detached.</li>
+<li><code>IChangeTrackEvents</code> &mdash; Receives notification before and
+after MicroStation executes an Undo or Redo command at the user's request.
+Also receives notification when an element in the active model changes. The
+type of the change is specified by MicroStation.</li>
+<li><code>IModalDialogEvents</code> &mdash; Receives notification when a modal
+dialog is opened in MicroStation, and when a modal dialog is closed.</li>
+</ul></div><div><h2>Registering to receive notification</h2><p>Creating an
+object that implements an interface is not sufficient to receive the messages
+that your program requires. For each of the interfaces listed above, your
+program must &ldquo;register&rdquo; the object that implements the interface.
+This tells MicroStation that your object is interested in receiving the notification
+messages. This ClassModule example shows a class that implements the IChangeTrackEvents
+interface, and a program that &ldquo;registers&rdquo; an object of this class
+with MicroStation.</p><p><code>Implements IChangeTrackEvents<br><br>Private
+Sub IChangeTrackEvents_BeginUndoRedo _<br> (ByVal AfterUndoRedo As Element,
+_<br> ByVal Action As MsdChangeTrackAction, _<br> ByVal IsUndo As Boolean)<br>&nbsp;&nbsp;&nbsp;If
+IsUndo = True Then<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;MsgBox "Undo was
+selected"<br> &nbsp;&nbsp;&nbsp;Else<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;MsgBox
+"Redo was selected"<br> &nbsp;&nbsp;&nbsp;End If<br>End Sub<br><br>Private
+Sub IChangeTrackEvents_ElementChanged _<br>(ByVal AfterChange As Element,
+_<br>ByVal BeforeChange As Element, _<br>ByVal Action As MsdChangeTrackAction,
+_<br> CantBeUndone As Boolean)<br><br>End Sub<br><br>Private Sub IChangeTrackEvents_FinishUndoRedo
+_<br>(ByVal IsUndo As Boolean)<br><br>End Sub<br><br>Private Sub IChangeTrackEvents_Mark()<br><br>End
+Sub</code></p><p><code>Sub UndoNotify()<br>&nbsp;&nbsp;&nbsp;Dim undoNotifier
+As New myCTEventsHandler<br>&nbsp;&nbsp;&nbsp;AddChangeTrackEventsHandler
+undoNotifier<br>End Sub </code></p><p>To run this example, create a ClassModule
+named myCTEventsHandler in your MVBA project and copy the code above (except
+the UndoNotify subroutine) to this class module. Then in the module for your
+MVBA project, copy the UndoNotify subroutine lines above. Run the UndoNotify
+subroutine. In your design file, each time you select Undo or Redo, a message
+box will appear telling you which command was selected.</p><p>The IChangeTrackEvents_ElementChanged
+event can be used to receive notification of a wide variety of events in your
+design file including changes to elements and models. See <a href="ms-its:MicroStationVBA.chm::/html/usobjIChangeTrackEvents.htm">
+IChangeTrackEvents</a> for more information. Note: It is important to test
+the action that caused the event, otherwise your program may try to handle
+a situation that did not occur.</p></div></div></body>
+</html>
