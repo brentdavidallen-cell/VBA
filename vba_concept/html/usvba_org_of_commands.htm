@@ -1,0 +1,178 @@
+<!--ArborText, Inc., 1988-2002, v.4002-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Organization of a MicroStation Command</title>
+<link href="/Office.css" type="text/css" rel="StyleSheet" media="screen"></head>
+<body><div><h1>Organization of a MicroStation Command</h1><p>There are two
+types of MicroStation-style commands that you can implement in VBA using provided
+interfaces. These tools behave like other MicroStation tools written in MDL,
+but there are certain guidelines that should be followed when writing one
+of these tools. The Primitive Command tool, and the Locate Command tool are
+discussed in detail here.</p><div><h2>Primitive Command tools</h2><p>A tool
+that implements the <a href="ms-its:MicroStationVBA.chm::/html/usobjiprimitivecommandevents.htm">
+IPrimitiveCommandEvents</a> interface is called a &ldquo;primitive&rdquo;
+command tool because its purpose is to place primitive drawing elements into
+the active model. The sub procedures your program must implement when using
+this interface are organized so that MicroStation can call each at a specific
+time during the use of the tool.</p><p>To write a Primitive Command tool,
+you must create a class module in your VBA project, since an interface can
+only be implemented by an object created from a class. To implement the interface
+your class must begin with the following line:</p><p><code>Implements IPrimitiveCommandEvents
+</code></p><p>In the class module you'll include code for each of the six
+events in the <a href="ms-its:MicroStationVBA.chm::/html/usobjiprimitivecommandevents.htm">
+IPrimitiveCommandEvents</a> interface. Each of the methods is discussed below
+in general terms of what should be accomplished by that method. They are presented
+in the usual order they are called, though the actual order depends on the
+user's actions.</p><div><h3>Start method</h3><p>The <a href="ms-its:MicroStationVBA.chm::/html/usmthstart.htm">
+Start</a> method is called by MicroStation when the command is first started.
+This happens when the program is initiated. Usually, the Start sub procedure
+initializes any objects or variables necessary for the command, and writes
+the name of the command to the command area of the status bar in MicroStation's
+main window. The <a href="ms-its:MicroStationVBA.chm::/html/usmthshowcommand.htm">
+ShowCommand</a> method is used for this purpose. A user prompt is usually
+displayed in the prompt area of the status bar as well. The <a href="ms-its:MicroStationVBA.chm::/html/usmthshowprompt.htm">
+ShowPrompt</a> method is used for this purpose.</p></div><div><h3>DataPoint
+method</h3><p>The <a href="ms-its:MicroStationVBA.chm::/html/usmthdatapoint.htm">
+DataPoint</a> method is called by MicroStation when the user enters a data
+point while your command is active. This method receives the location of the
+data point and the view in which the data point was entered.</p><p>Depending
+on the nature of your command this method might be called more than one time
+before the element is drawn and added to the active model, so you may need
+to save data point locations. The <a href="ms-its:MicroStationVBA.chm::/html/ussmpprimitive.htm">
+Element Creation Command Example</a> demonstrates a DataPoint method that
+saves data points in an array of Point3d data so that a line element can be
+created.</p><p>The DataPoint method may call the <a href="ms-its:MicroStationVBA.chm::/html/usmthstartdynamics.htm">
+StartDynamics</a> method of the <a href="ms-its:MicroStationVBA.chm::/html/usobjcommandstate.htm">
+CommandState</a> object so that you can dynamically draw the element your
+command is creating. When you start the dynamics MicroStation calls your Dynamics
+method, which is discussed next.</p><p><b>Note:</b> MicroStation automatically
+turns off dynamics when a command is started, so it is not necessary to call <a
+href="ms-its:MicroStationVBA.chm::/html/usmthstopdynamics.htm">StopDynamics
+</a> unless you have a specific reason to do so.</p><p>When your <a href="ms-its:MicroStationVBA.chm::/html/usmthdatapoint.htm">
+DataPoint</a> sub procedure receives the last point necessary to create the
+element, you should draw the element being created using the <a href="ms-its:MicroStationVBA.chm::/html/usenmmsddrawingmode.htm">
+msdDrawingModeNormal</a> drawing mode, and you should add the element to the
+active model. Typically these tasks are done close together at the end of
+the DataPoint method, but this is not a requirement. Use the <a href="ms-its:MicroStationVBA.chm::/html/usmthredraw.htm">
+Redraw</a> method of the <a href="ms-its:MicroStationVBA.chm::/html/usobjelement.htm">
+Element</a> class, followed by the <a href="ms-its:MicroStationVBA.chm::/html/usmthaddelement.htm">
+AddElement</a> method of the <a href="ms-its:MicroStationVBA.chm::html/usobjmodelreference.htm">
+ActiveModelReference</a> to add the element to the active model.</p></div><div><h3>
+Dynamics method</h3><p>The <a href="ms-its:MicroStationVBA.chm::/html/usmthdynamics.htm">
+Dynamics</a> method is pretty much the same as the <a href="ms-its:MicroStationVBA.chm::/html/usmthdatapoint.htm">
+DataPoint</a> point method, with two exceptions. First, MicroStation is not
+providing the location of a data point entered by the user, but the location
+of the mouse pointer instead. Second, an additional parameter is passed to
+the Dynamics sub procedure: the drawing mode. Using the pointer location to
+draw the element (it is supplied in a Point3d data type) means the element
+is &ldquo;attached&rdquo; to the pointer. The <a href="ms-its:MicroStationVBA.chm::/html/usmthdynamics.htm">
+Dynamics</a> method is called every time the pointer location changes, so
+doing lots of calculations in this method may affect the performance of the
+command.</p><p>As you draw the element on the screen during the Dynamics method,
+use the drawing mode that MicroStation specifies in the DrawMode parameter.
+The code to do this is:</p><p><code>&nbsp;&nbsp;&nbsp;oEl.Redraw DrawMode
+</code></p><p>See the <a href="ms-its:MicroStationVBA.chm::/html/ussmpprimitive.htm">
+Element Creation Command Example</a> for an example of using this.</p></div><div><h3>
+Reset method</h3><p>The <a href="ms-its:MicroStationVBA.chm::/html/usmthreset.htm">
+Reset</a> method is called by MicroStation when the user presses the reset
+button on the mouse while the command is active. This generally signals the
+user has completed the command, or wants to interrupt the command, so resetting
+variables is performed here. Typically, the <a href="ms-its:MicroStationVBA.chm::/html/usmthreset.htm">
+Reset</a> method also calls the <a href="ms-its:MicroStationVBA.chm::/html/usmthstartprimitive.htm">
+StartPrimitive</a> method of the <a href="ms-its:MicroStationVBA.chm::/html/usobjcommandstate.htm">
+CommandState</a> object to restart the command again. The code for this uses
+the Me keyword to refer to the current object:</p><p><code>&nbsp;&nbsp;&nbsp;CommandState.StartPrimitive
+Me</code></p></div><div><h3>Cleanup method</h3><p>The <a href="ms-its:MicroStationVBA.chm::/html/usmthcleanup.htm">
+Cleanup</a> method gives your program a chance to reset any object variables
+it may have created and do any other necessary tasks before the command exits.
+</p></div><div><h3>Keyin method</h3><p>The <a href="ms-its:MicroStationVBA.chm::/html/usmthkeyin.htm">
+Keyin</a> method is only called by MicroStation if the user enters a keyin,
+and the command was initiated with a call to <a href="ms-its:MicroStationVBA.chm::/html/usmthstartprimitive.htm">
+StartPrimitive</a> with WantKeyins set to True. In this case, MicroStation
+calls the <a href="ms-its:MicroStationVBA.chm::/html/usmthkeyin.htm">Keyin
+</a> sub procedure to allow your command to respond to the key-in command.
+This may happen at any time while your command is active.</p></div><div><h3>
+Running a Primitive Command tool</h3><p>Since the IPrimitiveCommandEvents
+interface is implemented by a class, there must be some additional code written
+to run it. VBA cannot execute the code within a class by itself, so a standard
+module (also called a code module) is created with a sub procedure that will
+create an instance object of the class, and tell MicroStation to run it. This
+code looks like this:</p><p><code>Sub Procedure runPrimitiveTool ()<br>&nbsp;&nbsp;&nbsp;CommandState.StartPrimitive
+New PlaceLineCommand<br>End Sub</code></p></div></div><div><h2>Locate Command
+tools</h2><p>A tool that implements the <a href="ms-its:MicroStationVBA.chm::/html/usobjilocatecommandevents.htm">
+ILocateCommandEvents</a> interface is generally one that is used to modify
+elements that already exist in the DGN file. Like the Primitive Command tools
+discussed above, Locate Commands must implement a group of sub procedures
+that MicroStation expects to call at various times throughout the execution
+of the command.</p><p>To write a VBA program that is a Locate Command, you
+must create a class that implements the <a href="ms-its:MicroStationVBA.chm::/html/usobjilocatecommandevents.htm">
+ILocateCommandEvents</a> interface. To implement the interface, your class
+must begin with the following line:</p><p><code>&nbsp;&nbsp;&nbsp;Implements
+ILocateCommandEvents</code></p><p>In the class module, you must include code
+for each of the seven events in the interface. These are each explained below
+in general terms of what is accomplished in each. The methods are listed in
+the order they are usually called by MicroStation, but in actual use the order
+will be determined by the actions of the user.</p><div><h3>Start method</h3><p>
+The Start method is the same for the Locate command as for the Primitive command
+type. Here the program should initalize variables if they are needed, and
+display prompt messages to the user, usually by means of the <a href="ms-its:MicroStationVBA.chm::/html/usmthshowcommand.htm">
+ShowCommand</a> and <a href="ms-its:MicroStationVBA.chm::/html/usmthshowprompt.htm">
+ShowPrompt</a> methods.</p></div><div><h3>LocateFilter method</h3><p>The <a
+href="ms-its:MicroStationVBA.chm::/html/usmthlocatefilter.htm">LocateFilter
+</a> method is called by MicroStation when the user selects an element while
+the command is active. The parameters passed to this method include the element
+chosen by the user, the data point location that was used to select the element
+and a Boolean variable called Accepted, which determines whether the element
+is acceptable to your command. If you set Accepted to False, the element is
+rejected and MicroStation will search for another element using the same datapoint.
+If you do not set Accepted to False within the <a href="ms-its:MicroStationVBA.chm::/html/usmthlocatefilter.htm">
+LocateFilter</a> method, the element is accepted.</p><p>If you reject an element,
+MicroStation will call <a href="ms-its:MicroStationVBA.chm::/html/usmthlocatefilter.htm">
+LocateFilter</a> again if it finds another element at the same location, and
+your program must accept or reject that element. This process continues until
+no more elements are found at the location of the data point. If this happens,
+MicroStation will call the <a href="ms-its:MicroStationVBA.chm::/html/usmthlocatefailed.htm">
+LocateFailed</a> sub procedure.</p><p>Depending on the nature of the command,
+you may choose to call the <a href="ms-its:MicroStationVBA.chm::/html/usmthstartdynamics.htm">
+StartDynamics</a> method of the <a href="ms-its:MicroStationVBA.chm::/html/usobjcommandstate.htm">
+CommandState</a> object.</p><p><b>Note:</b> MicroStation automatically turns
+off dynamics when a command is started, so it is not necessary to call <a
+href="ms-its:MicroStationVBA.chm::/html/usmthstopdynamics.htm">StopDynamics
+</a> unless you have a specific reason to do so.</p></div><div><h3>Dynamics
+method</h3><p>Called when the user moves the pointer on the screen, the <a
+href="ms-its:MicroStationVBA.chm::/html/usmthdynamics.htm">Dynamics</a> sub
+procedure gives your program the opportunity to draw elements dynamically
+on the screen to show the user what is going on. This is helpful to the user
+especially if your program is moving or modifying elements using specific
+locations.</p></div><div><h3>LocateFailed method</h3><p>When all elements
+at the entered data point have been rejected either by your <a href="ms-its:MicroStationVBA.chm::/html/usmthlocatefilter.htm">
+LocateFilter</a> method, or by the user, MicroStation calls the <a href="ms-its:MicroStationVBA.chm::/html/usmthlocatefailed.htm">
+LocateFailed</a> method. In this method your program should reset any variables
+it needs for another use of the command, then call <a href="ms-its:MicroStationVBA.chm::/html/usmthstartlocate.htm">
+StartLocate</a> on the <a href="ms-its:MicroStationVBA.chm::/html/usobjcommandstate.htm">
+CommandState</a> object to begin the command again.</p></div><div><h3>Accept
+method</h3><p>After the LocateFilter has accepted the element passed to it,
+the user has the opportunity to accept or reject the element. The <a href="ms-its:MicroStationVBA.chm::/html/usmthaccept.htm">
+Accept</a> method is called if the user enters a data point to accept the
+selected element. This is where your program will do the necessary work of
+modifying or processing the selected element according to the purpose of your
+command.</p></div></div><div><h3>LocateReset method</h3><p>The <a href="ms-its:MicroStationVBA.chm::/html/usmthlocatereset.htm">
+LocateReset</a> method is called by MicroStation when the user presses the
+reset button on the mouse while the command is active. This generally signals
+the user has completed the command, or wants to interrupt the command, so
+resetting variables is performed here. Typically, the <a href="ms-its:MicroStationVBA.chm::/html/usmthlocatereset.htm">
+LocateReset</a> method also calls the <a href="ms-its:MicroStationVBA.chm::/html/usmthstartlocate.htm">
+StartLocate</a> method of the <a href="ms-its:MicroStationVBA.chm::/html/usobjcommandstate.htm">
+CommandState</a> object to restart the command again. The code for this uses
+the Me keyword to refer to the current object:</p><p><code>&nbsp;&nbsp;&nbsp;CommandState.StartLocate
+Me</code></p></div><div><h3>Cleanup method</h3><p>The <a href="ms-its:MicroStationVBA.chm::/html/usmthcleanup.htm">
+Cleanup</a> method gives your program a chance to reset any object variables
+it may have created and do any other necessary tasks before the command exits.
+</p></div><div><h3>Calling a Locate Command</h3><p>Typically, a locate command
+is activated from a procedure in a standard code module. The code to start
+a Locate Command tool would look like this:</p><code>Sub Procedure runLocateTool
+()<br>&nbsp;&nbsp;&nbsp;CommandState.StartLocate New fixElementCommand<br>End
+Sub</code><p>For an example of a complete Locate Command, see the <a href="ms-its:MicroStationVBA.chm::/html/ussmplocate.htm">
+Copy Element Command Example</a>.</p></div></div></body>
+</html>
